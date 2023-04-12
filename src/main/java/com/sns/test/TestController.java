@@ -45,12 +45,4 @@ public class TestController {
 		return postMapper.selectPostList();
 	}
 	
-	@GetMapping("/user/sign_in_view")
-	public String signInView() {
-		return "loginView";
-	}
-	
-//	@ResponseBody
-//	@PostMapping("/user/sign_in")
-//	public 
 }
