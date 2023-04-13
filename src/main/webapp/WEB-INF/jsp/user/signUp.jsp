@@ -77,5 +77,52 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$("#signUpForm").on('submit', function(e){
+		e.preventDefault(); // 서브밋 기능 중단
+		
+		let loginId = $("#loginId").val().trim();
+		let password = $("#password").val();
+		let confirmPassword = $("#confirmPassword").val();
+		let name = $("#name").val().trim();
+		let email = $("#email").val().trim();
+		
+		if(!loginId){
+			alert("아이디를 입력해주세요");
+			return false;
+		}
+		if(!password || !confirmPassword){
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		if(password != confirmPassword){
+			alert("비밀번호가 일치하지 않습니다");
+		}
+		if(!name) {
+			alert("이름을 입력해주세요");
+			return false;
+		}
+		if(!email){
+			alert("이메일을 입력해주세요");
+			return false;
+		}
+		if($("#idCheckOk").hasClass('d-none')){
+			alert("아이디 중복확인을 해주세요");
+			return false;
+		}
+		
+		let url = $(this).attr('action');
+		let params = $(this).serialize(); // name 속성 값들 가져오기
+		
+		$.post(url, params)
+		.done(function(data){
+			if(data.code == 1){
+				alert("회원가입에 성공했습니다.");
+				location.href = "/user/sign_in_view";
+			} else {
+				alert(data.errorMessage);
+			}
+		});
+	});
 });
 </script>
