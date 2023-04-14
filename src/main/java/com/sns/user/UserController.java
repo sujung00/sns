@@ -1,5 +1,7 @@
 package com.sns.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,5 +35,14 @@ public class UserController {
 		model.addAttribute("view", "user/signIn");
 		
 		return "template/layout";
+	}
+	
+	@RequestMapping("/sign_out")
+	public String signOut(HttpSession session) {
+		session.removeAttribute("userId");
+		session.removeAttribute("userName");
+		session.removeAttribute("userLoginId");
+		
+		return "redirect:/timeline/timeline_view";
 	}
 }
