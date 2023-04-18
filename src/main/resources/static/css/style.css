@@ -7,7 +7,7 @@ a, a:hover {
 
 header {
 	height: 100px;
-	background-color: #D8D8D8;
+    background-color: var(--primary-color);
 }
 
 .contents {
@@ -128,4 +128,14 @@ textarea {
 }
 .comment {
 	border: none;
+}
+.btn-upload {
+	cursor: pointer;
+    padding: .5rem .7rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
 }

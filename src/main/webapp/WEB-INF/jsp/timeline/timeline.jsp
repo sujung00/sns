@@ -15,23 +15,25 @@
 				<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
 				<input type="file" id="file" class="d-none" accept=".gif, .jpg, .png, .jpeg">
 				<%-- 이미지에 마우스 올리면 마우스커서가 링크 커서가 변하도록 a 태그 사용 --%>
-				<a href="#" id="fileUploadBtn">
+				<a href="#" id="fileUploadBtn" class="ml-2">
 					<img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
 				</a>
 
 				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
 				<div id="fileName" class="ml-2 d-flex align-items-center"></div>
 			</div>
-			<button id="writeBtn" class="btn btn-info">게시</button>
+			<button id="writeBtn" class="btn btn-upload">게시</button>
 		</div>
 	</div>
 	</c:if>
 
 	<div class="pt-4">
+	
 		<!-- card -->
-		<div class="border">
+		<c:forEach items="${postList}" var="post">
+		<div class="border mb-3">
 			<div class="d-flex align-items-center justify-content-between">
-				<span class="m-2"><b>marobiana</b></span>
+				<span class="m-2"><b>${post.userId}</b></span>
 				<a href="#" class="more-btn">
 					<img alt="더보기" src="/static/img/more-icon.png" width="30"
 						class="mr-2">
@@ -39,9 +41,9 @@
 			</div>
 			<div>
 				<div class="w-100">
-					<img alt="post 이미지" src="/static/img/cat.jpg" class="w-100">
+					<img alt="post 이미지" src="${post.imagePath}" class="w-100">
 				</div>
-				<div class="card-like m-3">
+				<div class="card-like m-2">
 					<a href="#" class="like-btn" >
 						<img src="/static/img/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
@@ -49,9 +51,10 @@
 				</div>
 				<div class="ml-2 mt-1 d-flex">
 					<div>
-						<b>marobiana</b>
+						<b>${post.userId}</b>
 					</div>
-					<div class="ml-1">비지도 학습을 해본 결과 입니다. cluster 알고리즘을 사용해봤어요</div>
+					<div class="ml-1">${post.content}</div>
+					<!-- 비지도 학습을 해본 결과 입니다. cluster 알고리즘을 사용해봤어요 -->
 				</div>
 				<span class="ml-2"><b>댓글</b></span>
 			</div>
@@ -63,12 +66,15 @@
 					</a>
 				</div>
 			</div>
+			<!-- 댓글 쓰기 -->
+			<c:if test="${not empty userId}">
 			<div class="border d-flex">
-				<input type="text" id="comment" name="comment" placeholder="댓글 달기"
-					class="comment col-10">
-				<button type="button" class="btn btn-light col-2">게시</button>
+				<input type="text" id="comment" name="comment" placeholder="댓글 달기" class="comment col-10">
+				<button type="button" class="btn btn-light col-2 comment-btn" data-post-id="${post.id}">게시</button>
 			</div>
+			</c:if>
 		</div>
+		</c:forEach>
 	</div>
 </div>
 
@@ -143,6 +149,39 @@ $(document).ready(function(){
 			}
 			, error:function(request, status, error) {
 				alert("글을 업로드하는데 실패했습니다.");
+			}
+		})
+	});
+	
+	// 댓글 게시 버튼 클릭
+	$(".comment-btn").on("click", function(){
+		let postId = $(this).data("post-id");
+		// 댓글 내용 가져오기
+		// 1)
+		//let content = $(this).prev().val();
+		
+		// 2)
+		let content = $(this).siblings('input').val();
+		
+		if(!content) {
+			alert("댓글을 입력해주세요");
+			return;
+		}
+		
+		$.ajax({
+			type:"POST"
+			, url:"/comment/create"
+			, data:{"postId":postId, "content":content}
+		
+			, success:function(data){
+				if(data.code == 1){
+					location.reload(true); 
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error:function(request, status, error) {
+				alert("댓글 게시에 실패했습니다.");
 			}
 		})
 	});

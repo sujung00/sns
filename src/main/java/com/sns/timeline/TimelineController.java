@@ -26,6 +26,8 @@ public class TimelineController {
 	// http://localhost:8080/timeline/timeline_view
 	@GetMapping("/timeline_view")
 	public String timelineView(Model model) {
+		
+		//posts
 		List<Post> postList = postBO.getPostList();
 		
 		model.addAttribute("view", "timeline/timeline");
