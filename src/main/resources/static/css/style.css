@@ -7,7 +7,7 @@ a, a:hover {
 
 header {
 	height: 100px;
-    background-color: var(--primary-color);
+	background-color: var(--primary-color);
 }
 
 .contents {
@@ -23,101 +23,100 @@ header {
 	background-color: #D8D8D8;
 }
 
-
 .form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
 }
 
 .form-signin .checkbox {
-  font-weight: 400;
+	font-weight: 400;
 }
 
 .form-signin .form-floating:focus-within {
-  z-index: 2;
+	z-index: 2;
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 /*
 **********
 */
 :root {
-    --primary-color: #4EA685;
-    --secondary-color: #57B894;
-    --black: #000000;
-    --white: #ffffff;
-    --gray: #efefef;
-    --gray-2: #757575;
-
-    --facebook-color: #4267B2;
-    --google-color: #DB4437;
-    --twitter-color: #1DA1F2;
-    --insta-color: #E1306C;
+	--primary-color: #4EA685;
+	--secondary-color: #57B894;
+	--black: #000000;
+	--white: #ffffff;
+	--gray: #efefef;
+	--gray-2: #757575;
+	--facebook-color: #4267B2;
+	--google-color: #DB4437;
+	--twitter-color: #1DA1F2;
+	--insta-color: #E1306C;
 }
 
 .input-group {
-    position: relative;
-    width: 100%;
-    margin: 1rem 0;
+	position: relative;
+	width: 100%;
+	margin: 1rem 0;
 }
 
 .input-group i {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    font-size: 1.4rem;
-    color: var(--gray-2);
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+	font-size: 1.4rem;
+	color: var(--gray-2);
 }
 
 .input-group input {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    font-size: 1rem;
-    background-color: var(--gray);
-    border-radius: .5rem;
-    border: 0.125rem solid var(--white);
-    outline: none;
+	width: 100%;
+	padding: 0.7rem 1rem;
+	font-size: 1rem;
+	background-color: var(--gray);
+	border-radius: .5rem;
+	border: 0.125rem solid var(--white);
+	outline: none;
 }
- 
+
 .input-group input:focus {
-    border: 0.125rem solid var(--primary-color);
+	border: 0.125rem solid var(--primary-color);
 }
 
 .btn-user {
-    cursor: pointer;
-    width: 100%;
-    padding: .6rem 0;
-    border-radius: .5rem;
-    border: none;
-    background-color: var(--primary-color);
-    color: var(--white);
-    font-size: 1rem;
-    outline: none;
+	cursor: pointer;
+	width: 100%;
+	padding: .6rem 0;
+	border-radius: .5rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1rem;
+	outline: none;
 }
+
 .btn-user-check {
 	cursor: pointer;
-    width: 100%;
-    padding: .5rem 0;
-    border-radius: .3rem;
-    border: none;
-    background-color: var(--primary-color);
-    color: var(--white);
-    font-size: 1rem;
-    outline: none;
+	width: 100%;
+	padding: .5rem 0;
+	border-radius: .3rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1rem;
+	outline: none;
 }
 
 /*
@@ -126,16 +125,79 @@ header {
 textarea {
 	border: none;
 }
+
 .comment {
 	border: none;
 }
+
 .btn-upload {
 	cursor: pointer;
-    padding: .5rem .7rem;
-    border-radius: .5rem;
-    border: none;
-    background-color: var(--primary-color);
-    color: var(--white);
-    font-size: 1rem;
-    outline: none;
+	padding: .5rem .7rem;
+	border-radius: .5rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1rem;
+	outline: none;
+}
+/*
+프로필
+*/
+.btn-profile {
+	cursor: pointer;
+	width: 60%;
+	padding: .5rem;
+	border-radius: .5rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1rem;
+	outline: none;
+}
+
+.profile-table {
+	background-color: var(--secondary-color);
+	padding: .5rem;
+	color: var(--white);
+}
+
+.profile-post-image {
+	padding: .1rem;
+	max-height: 365;
+	width: 33%;
+}
+/*
+프로필 변경
+*/
+.btn-profile-fix {
+	cursor: pointer;
+	padding: .5rem .9rem;
+	border-radius: .5rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1rem;
+	outline: none;
+}
+
+.btn-fix {
+	cursor: pointer;
+	width: 45%;
+	padding: 0.7rem;
+	border-radius: .5rem;
+	border: none;
+	background-color: var(--primary-color);
+	color: var(--white);
+	font-size: 1.1rem;
+	outline: none;
+}
+
+.profile-fix-input {
+	width: 50%;
+	padding: 1.5rem;
+	font-size: 1.1rem;
+	background-color: var(--gray);
+	border-radius: 1rem;
+	border: 0.125rem solid var(--white);
+	outline: none;
 }

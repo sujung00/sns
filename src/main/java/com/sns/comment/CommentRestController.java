@@ -46,9 +46,6 @@ public class CommentRestController {
 			result.put("errorMessage", "댓글 작성에 실패했습니다.");
 		}
 		
-		
-
-		
 		return result;
 	}
 }

@@ -30,47 +30,56 @@
 	<div class="pt-4">
 	
 		<!-- card -->
-		<c:forEach items="${postList}" var="post">
+		<c:forEach items="${cardList}" var="card">
 		<div class="border mb-3">
 			<div class="d-flex align-items-center justify-content-between">
-				<span class="m-2"><b>${post.userId}</b></span>
+				<a href="/user/profile?userId=${card.user.id}" class="m-2"><b>${card.user.loginId}</b></a>
 				<a href="#" class="more-btn">
-					<img alt="더보기" src="/static/img/more-icon.png" width="30"
-						class="mr-2">
+					<img alt="더보기" src="/static/img/more-icon.png" width="30" class="mr-2">
 				</a>
 			</div>
 			<div>
 				<div class="w-100">
-					<img alt="post 이미지" src="${post.imagePath}" class="w-100">
+					<img alt="post 이미지" src="${card.post.imagePath}" class="w-100">
 				</div>
-				<div class="card-like m-2">
-					<a href="#" class="like-btn" >
+				
+				<!-- 좋아요 -->
+				<div class="card-like ml-2 mt-2 d-flex align-items-center">
+					<a href="#" class="like-btn mr-2 d-flex align-items-center">
 						<img src="/static/img/heart-icon.png" width="18px" height="18px" alt="filled heart">
 					</a>
-					좋아요 10개
+					<span>좋아요 10개</span>
 				</div>
-				<div class="ml-2 mt-1 d-flex">
+				
+				<div class="ml-2 mb-2 d-flex">
 					<div>
-						<b>${post.userId}</b>
+						<b>${card.user.loginId}</b>
 					</div>
-					<div class="ml-1">${post.content}</div>
-					<!-- 비지도 학습을 해본 결과 입니다. cluster 알고리즘을 사용해봤어요 -->
+					<div class="ml-2">${card.post.content}</div>
 				</div>
 				<span class="ml-2"><b>댓글</b></span>
 			</div>
-			<div class="border">
-				<div class="d-flex align-items-center p-2">
-					<span><b>hagulu</b> : 분류가 잘 되었군요~</span>
-					<a href="#" class="commentDelBtn">
-						<img alt="댓글삭제" src="/static/img/x-icon.png" width="10" class="ml-1">
-					</a>
+			
+			<!-- 댓글 -->
+			<c:forEach items="${card.commentList}" var="comment">
+				<div class="border">
+					<div class="d-flex align-items-center p-2">
+						<span><b>${comment.user.loginId}</b> : ${comment.comment.content}</span>
+						<!-- 댓글 삭제 버튼 -->
+						<c:if test="${userId == comment.comment.userId}">
+						<a href="#" class="commentDelBtn d-flex align-items-center">
+							<img alt="댓글삭제" src="/static/img/x-icon.png" width="10" class="ml-2">
+						</a>
+						</c:if>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
+			
 			<!-- 댓글 쓰기 -->
 			<c:if test="${not empty userId}">
 			<div class="border d-flex">
 				<input type="text" id="comment" name="comment" placeholder="댓글 달기" class="comment col-10">
-				<button type="button" class="btn btn-light col-2 comment-btn" data-post-id="${post.id}">게시</button>
+				<button type="button" class="btn btn-light col-2 comment-btn" data-post-id="${card.post.id}">게시</button>
 			</div>
 			</c:if>
 		</div>

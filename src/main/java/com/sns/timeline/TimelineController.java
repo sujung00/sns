@@ -8,15 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sns.comment.bo.CommentBO;
 import com.sns.post.bo.PostBO;
-import com.sns.post.model.Post;
+import com.sns.timeline.bo.TimelineBO;
+import com.sns.timeline.model.CardView;
 
 @RequestMapping("/timeline")
 @Controller
 public class TimelineController {
 	
 	@Autowired
-	private PostBO postBO;
+	private TimelineBO timelineBO;
 
 	/**
 	 * 타임라인 화면
@@ -26,12 +28,13 @@ public class TimelineController {
 	// http://localhost:8080/timeline/timeline_view
 	@GetMapping("/timeline_view")
 	public String timelineView(Model model) {
+
+		// card => view 용으로 가공
+		List<CardView> cardList = timelineBO.generateCardList();
 		
-		//posts
-		List<Post> postList = postBO.getPostList();
+		model.addAttribute("cardList", cardList);
 		
 		model.addAttribute("view", "timeline/timeline");
-		model.addAttribute("postList", postList);
 		
 		return "template/layout";
 	}
