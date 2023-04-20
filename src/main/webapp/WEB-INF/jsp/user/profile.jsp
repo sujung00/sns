@@ -15,7 +15,17 @@
 		</div>
 		<div class="ml-5 d-flex align-items-center w-100">
 			<div class="w-100">
-				<h2>${user.loginId}</h2>
+				<div class="d-flex align-items-center">
+					<h2>${user.loginId}</h2>
+					<c:if test="${not empty userId}">
+					<c:if test="${userId != user.id}">
+						<!-- unfollow 상태 일 때 -->
+						<button id="followBtn" class="btn profile-follow-btn ml-3" data-user-id="${userId}" data-follow-id="${user.id}">팔로우</button>
+						<!-- follow 상태 일 때 -->
+						<button id="unFollowBtn" class="btn profile-follow-btn ml-3 d-none" data-user-id="${userId}" data-follow-id="${user.id}">언팔로우</button>
+					</c:if>
+					</c:if>
+				</div>
 				<c:if test="${userId == user.id}">
 				<form action="/user/profile_edit_view" method="post">
 					<input id="userId" name="userId" value="${userId}" class="d-none">
@@ -62,3 +72,54 @@
 		</c:forEach>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		// follow 버튼
+		$("#followBtn").on("click", function(){
+			$(this).addClass('d-none');
+			$("#unFollowBtn").removeClass('d-none');
+			
+			let userId = $(this).data("user-id");
+			let followId = $(this).data("follow-id");
+			
+			$.ajax({
+				type:"POST"
+				, url:"/follow/follow"
+				, data:{"userId":userId, "followId":followId}
+			
+				, success:function(data){
+					if(data.code == 1){
+						alert("팔로우 되었습니다.");
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+			})
+			
+		});
+		
+		// unfollow버튼
+		$("#unFollowBtn").on("click", function(){
+			$(this).addClass('d-none');
+			$("#followBtn").removeClass('d-none');
+			
+			let userId = $(this).data("user-id");
+			let followId = $(this).data("follow-id");
+			
+			$.ajax({
+				type:"POST"
+				, url:"/follow/unfollow"
+				, data:{"userId":userId, "followId":followId}
+			
+				, success:function(data){
+					if(data.code == 1){
+						alert("언팔로우 되었습니다.");
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+			})
+		});
+	});
+</script>

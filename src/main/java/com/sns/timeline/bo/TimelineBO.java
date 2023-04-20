@@ -48,6 +48,10 @@ public class TimelineBO {
 			List<CommentView> commentList = commentBO.generateCommentViewListByPostId(post.getId());
 			card.setCommentList(commentList);
 			
+			// like
+			
+			// follow
+			
 			//!!! cardList에 채우기
 			cardViewList.add(card);
 		}

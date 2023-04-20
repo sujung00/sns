@@ -122,6 +122,20 @@ header {
 /*
 타임라인
 */
+.timeline {
+	width: 50%;
+}
+
+.card {
+	margin: .5rem;
+}
+
+.card-login-id {
+	font-weight: bold;
+	font-size: 1.1rem;
+	padding: .3rem;
+}
+
 textarea {
 	border: none;
 }
@@ -140,6 +154,16 @@ textarea {
 	font-size: 1rem;
 	outline: none;
 }
+
+.follow-btn {
+	cursor: pointer;
+	border: none;
+	background-color: white;
+	color: var(--primary-color);
+	font-size: 0.8rem;
+	font-weight: bold;
+}
+
 /*
 프로필
 */
@@ -170,6 +194,15 @@ textarea {
 .profile-image {
 	height: 150px;
 	border-radius: 70%;
+}
+
+.profile-follow-btn{
+	height: 100%;
+	border: none;
+	background-color: white;
+	color: var(--primary-color);
+	font-size: 1rem;
+	font-weight: bold;
 }
 
 /*

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="container">
+<div class="container timeline">
 	<!-- 글쓰기 영역 -->
 	<c:if test="${not empty userId}">
 	<br>
@@ -31,9 +31,14 @@
 	
 		<!-- card -->
 		<c:forEach items="${cardList}" var="card">
-		<div class="border mb-3">
+		<div class="border mb-5 card">
 			<div class="d-flex align-items-center justify-content-between">
-				<a href="/user/profile_view?loginId=${card.user.loginId}" class="m-2"><b>${card.user.loginId}</b></a>
+				<div class="m-2">
+					<a href="/user/profile_view?loginId=${card.user.loginId}"><span class="card-login-id">${card.user.loginId}</span></a>
+					<c:if test="${not empty userId}">
+						<button type="button" class="follow-btn">팔로우</button>
+					</c:if>
+				</div>
 				<a href="#" class="more-btn">
 					<img alt="더보기" src="/static/img/more-icon.png" width="30" class="mr-2">
 				</a>
@@ -51,7 +56,7 @@
 					<span>좋아요 10개</span>
 				</div>
 				
-				<div class="ml-2 mb-2 d-flex">
+				<div class="ml-2 mt-1 mb-3 d-flex">
 					<div>
 						<b>${card.user.loginId}</b>
 					</div>
