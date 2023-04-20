@@ -6,10 +6,10 @@
 		<div>
 			<c:choose>
 				<c:when test="${not empty user.profileImagePath}">
-					<img alt="프로필 이미지 사진" src="${user.profileImagePath}" width="150">
+					<img alt="프로필 이미지 사진" src="${user.profileImagePath}" width="150" class="profile-image">
 				</c:when>
 				<c:otherwise>
-					<img alt="프로필 이미지 사진" src="/static/img/profile.jpg" width="150">
+					<img alt="프로필 이미지 사진" src="/static/img/profile.jpg" width="150" class="profile-image">
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -17,7 +17,10 @@
 			<div class="w-100">
 				<h2>${user.loginId}</h2>
 				<c:if test="${userId == user.id}">
-				<button id="profileFixBtn" type="button" class="btn btn-secondary mt-3 btn-profile" data-user-id="${userId}">프로필 편집</button>
+				<form action="/user/profile_edit_view" method="post">
+					<input id="userId" name="userId" value="${userId}" class="d-none">
+					<button id="profileFixBtn" type="submit" class="btn btn-secondary mt-3 btn-profile">프로필 편집</button>
+				</form>
 				</c:if>
 			</div>
 		</div>
@@ -59,23 +62,3 @@
 		</c:forEach>
 	</div>
 </div>
-
-<script>
-$(document).ready(function(){
-	$("#profileFixBtn").on("click", function(){
-		let userId = $(this).data("user-id");
-		
-		/* .ajax({
-			type:"POST"
-			, url:"timeline/timeline_fix"
-			, data{"userId":userId}
-		
-			, success:function(data){
-				if(data.code == 1){
-					
-				}
-			}
-		}) */
-	});
-});
-</script>

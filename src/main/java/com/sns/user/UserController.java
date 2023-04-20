@@ -53,6 +53,11 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 로그아웃
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/sign_out")
 	public String signOut(HttpSession session) {
 		session.removeAttribute("userId");
@@ -68,14 +73,15 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	// http://localhost:8080/user/profile
-	@GetMapping("/profile")
+	// http://localhost:8080/user/profile_view?loginId=sujung
+	// http://localhost:8080/user/profile?loginId=sujung
+	@GetMapping("/profile_view")
 	public String profile(
-			@RequestParam("userId") int userId,
+			@RequestParam("loginId") String loginId,
 			Model model) {
 		
-		User user = userBO.getUserByUserId(userId);
-		List<Post> postList = postBO.getPostListByUserId(userId);
+		User user = userBO.getUserByLoginId(loginId);
+		List<Post> postList = postBO.getPostListByUserId(user.getId());
 		
 		model.addAttribute("view", "user/profile");
 		model.addAttribute("user", user);
@@ -84,7 +90,14 @@ public class UserController {
 		return "template/layout";
 	}
 	
-	@GetMapping("/profile_fix")
+	/**
+	 * 프로필 편집
+	 * @param userId
+	 * @param model
+	 * @return
+	 */
+	// http://localhost:8080/user/profile_edit_view?userId=1
+	@PostMapping("/profile_edit_view")
 	public String profileFix(
 			@RequestParam("userId") int userId,
 			Model model) {
@@ -92,7 +105,7 @@ public class UserController {
 		User user = userBO.getUserByUserId(userId);
 		List<Post> postList = postBO.getPostListByUserId(userId);
 		
-		model.addAttribute("view", "user/profileFix");
+		model.addAttribute("view", "user/profileEdit");
 		model.addAttribute("user", user);
 		model.addAttribute("postList", postList);
 		

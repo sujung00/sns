@@ -33,7 +33,7 @@
 		<c:forEach items="${cardList}" var="card">
 		<div class="border mb-3">
 			<div class="d-flex align-items-center justify-content-between">
-				<a href="/user/profile?userId=${card.user.id}" class="m-2"><b>${card.user.loginId}</b></a>
+				<a href="/user/profile_view?loginId=${card.user.loginId}" class="m-2"><b>${card.user.loginId}</b></a>
 				<a href="#" class="more-btn">
 					<img alt="더보기" src="/static/img/more-icon.png" width="30" class="mr-2">
 				</a>
@@ -89,7 +89,7 @@
 
 <script>
 $(document).ready(function(){
-	// 파일 업로드 이미지 클릭 = > 숨겨져있는 file 태글르 동작시킨다.
+	// 파일 업로드 이미지 클릭 = > 숨겨져있는 file 태그를 동작시킨다.
 	$("#fileUploadBtn").on('click', function(e){
 		e.preventDefault(); // a 태그의 스크롤이 올라가는 현상 방지
 		

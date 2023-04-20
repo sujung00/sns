@@ -74,5 +74,28 @@
 			WHERE
 				`id` = #{userId}
 	</select>
+	
+	<update id="updateUserById" parameterType="map">
+		UPDATE `user`
+		SET
+			`loginId` = #{loginId}
+			,`name` = #{name}
+			,`email` = #{email}
+			,`profileImagePath` = #{profileImagePath}
+			,`updatedAt` = NOW()
+		WHERE
+			`id` = #{userId}
+	</update>
+	
+	<update id="updateUserByIdNotImage" parameterType="map">
+		UPDATE `user`
+		SET
+			`loginId` = #{loginId}
+			,`name` = #{name}
+			,`email` = #{email}
+			,`updatedAt` = NOW()
+		WHERE
+			`id` = #{userId}
+	</update>
 
 </mapper>

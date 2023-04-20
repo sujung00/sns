@@ -1,6 +1,7 @@
 package com.sns.user.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sns.user.model.User;
 
@@ -19,4 +20,17 @@ public interface UserMapper {
 			@Param("password") String password);
 	
 	public User selectUserByUserId(int userId);
+	
+	public int updateUserById(
+			@Param("userId") int userId,
+			@Param("name") String name,
+			@Param("loginId") String loginId,
+			@Param("email") String email,
+			@Param("profileImagePath") String profileImagePath);
+	
+	public int updateUserByIdNotImage(
+			@Param("userId") int userId,
+			@Param("name") String name,
+			@Param("loginId") String loginId,
+			@Param("email") String email);
 }

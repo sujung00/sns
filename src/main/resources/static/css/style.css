@@ -166,6 +166,12 @@ textarea {
 	max-height: 365;
 	width: 33%;
 }
+
+.profile-image {
+	height: 150px;
+	border-radius: 70%;
+}
+
 /*
 프로필 변경
 */
@@ -174,7 +180,7 @@ textarea {
 	padding: .5rem .9rem;
 	border-radius: .5rem;
 	border: none;
-	background-color: var(--primary-color);
+	background-color: var(--secondary-color);
 	color: var(--white);
 	font-size: 1rem;
 	outline: none;
@@ -182,14 +188,15 @@ textarea {
 
 .btn-fix {
 	cursor: pointer;
-	width: 45%;
-	padding: 0.7rem;
+	width: 15%;
+	padding: 0.9rem;
 	border-radius: .5rem;
 	border: none;
 	background-color: var(--primary-color);
 	color: var(--white);
 	font-size: 1.1rem;
 	outline: none;
+	font-weight: bold;
 }
 
 .profile-fix-input {
@@ -200,4 +207,10 @@ textarea {
 	border-radius: 1rem;
 	border: 0.125rem solid var(--white);
 	outline: none;
+}
+
+.profile-edit-image {
+	width: 120px;
+	height: 120px;
+	border-radius: 70%;
 }
