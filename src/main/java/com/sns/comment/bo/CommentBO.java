@@ -41,6 +41,7 @@ public class CommentBO {
 			User user = userBO.getUserByUserId(comment.getUserId());
 			commentView.setUser(user);
 			
+			// 새로 만든 댓글 정보를 list에 담는다
 			commentViewList.add(commentView);
 		}
 		
@@ -49,5 +50,7 @@ public class CommentBO {
 		return commentViewList;
 	}
 	
-	
+	public int deleteComment(int commentId) {
+		return commentMapper.deleteComment(commentId) ;
+	}
 }

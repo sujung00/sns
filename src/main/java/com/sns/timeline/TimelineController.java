@@ -2,6 +2,8 @@ package com.sns.timeline;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +29,12 @@ public class TimelineController {
 	 */
 	// http://localhost:8080/timeline/timeline_view
 	@GetMapping("/timeline_view")
-	public String timelineView(Model model) {
+	public String timelineView(Model model, HttpSession session) {
 
+		Integer userId = (Integer)session.getAttribute("userId");
+		
 		// card => view 용으로 가공
-		List<CardView> cardList = timelineBO.generateCardList();
+		List<CardView> cardList = timelineBO.generateCardList(userId);
 		
 		model.addAttribute("cardList", cardList);
 		

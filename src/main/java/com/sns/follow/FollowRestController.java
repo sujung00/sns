@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sns.follow.bo.FollowBO;
 
-@RequestMapping("/follow")
 @RestController
 public class FollowRestController {
 
@@ -27,36 +27,21 @@ public class FollowRestController {
 	 * @param session
 	 * @return
 	 */
-	@PostMapping("/follow")
+	@RequestMapping("/follow/{followId}")
 	public Map<String, Object> follow(
-			@RequestParam("userId") int userId,
-			@RequestParam("followId") int followId,
+			@PathVariable int followId,
 			HttpSession session){
 		Map<String, Object> result = new HashMap<>();
 		
-		// db insert
-		int rowCount = followBO.addFollow(userId, followId);
-		
-		if(rowCount > 0) {
-			result.put("code", 1);
-			result.put("result", "성공");
-		} else {
-			result.put("code", 500);
-			result.put("errorMessage", "팔로우 실패");
+		Integer userId = (Integer)session.getAttribute("userId");
+		if(userId == null) {
+			result.put("code", 300);
+			result.put("errorMessage", "로그인 후 가능합니다");
 		}
 		
-		return result;
-	}
-	
-	@PostMapping("/unfollow")
-	public Map<String, Object> unfollow(
-			@RequestParam("userId") int userId,
-			@RequestParam("followId") int followId,
-			HttpSession session){
-		Map<String, Object> result = new HashMap<>();
-		
-		// db delete
-		int rowCount = followBO.deleteFollow(userId, followId);
+		// db insert
+		int rowCount = 1;
+		//followBO.followToggle(userId, followId);
 		
 		if(rowCount > 0) {
 			result.put("code", 1);

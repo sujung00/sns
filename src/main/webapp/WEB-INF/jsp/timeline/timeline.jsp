@@ -50,9 +50,18 @@
 				
 				<!-- 좋아요 -->
 				<div class="card-like ml-2 mt-2 d-flex align-items-center">
-					<a href="#" class="like-btn mr-2 d-flex align-items-center">
-						<img src="/static/img/heart-icon.png" width="18px" height="18px" alt="filled heart">
-					</a>
+					<!-- 채워진 하트 -->
+					<c:if test="${card.filledLike eq true}">
+						<a href="#" class="like-btn mr-2 d-flex align-items-center" data-post-id="${card.post.id}">
+							<img src="/static/img/full-heart-icon.png" width="18px" height="18px" alt="filled heart">
+						</a>
+					</c:if>
+					<!-- 빈 하트 -->
+					<c:if test="${card.filledLike eq false}">
+						<a href="#" class="like-btn mr-2 d-flex align-items-center" data-post-id="${card.post.id}">
+							<img src="/static/img/heart-icon.png" width="18px" height="18px" alt="filled heart">
+						</a>
+					</c:if>
 					<span>좋아요 10개</span>
 				</div>
 				
@@ -72,7 +81,7 @@
 						<span><b>${comment.user.loginId}</b> : ${comment.comment.content}</span>
 						<!-- 댓글 삭제 버튼 -->
 						<c:if test="${userId == comment.comment.userId}">
-						<a href="#" class="commentDelBtn d-flex align-items-center">
+						<a href="#" class="commentDelBtn d-flex align-items-center" data-comment-id="${comment.comment.id}">
 							<img alt="댓글삭제" src="/static/img/x-icon.png" width="10" class="ml-2">
 						</a>
 						</c:if>
@@ -196,6 +205,53 @@ $(document).ready(function(){
 			}
 			, error:function(request, status, error) {
 				alert("댓글 게시에 실패했습니다.");
+			}
+		})
+	});
+	
+	// 좋아요 버튼 클릭
+	$(".like-btn").on("click", function(e){
+		e.preventDefault(); // 위로 올라가는 현상 방지
+		let postId = $(this).data("post-id");
+		
+		$.ajax({
+			url:"/like/" + postId
+			
+			, success:function(data) {
+				if(data.code == 1){
+					location.reload();
+				} else if(data.code == 300) {
+					alert(data.errorMessage);
+					
+					location.href = "/user/sign_in_view";
+				}
+			}
+			, error:function(request, status, error) {
+				alert("좋아요에 실패했습니다.");
+			}
+		
+		})
+	});
+	
+	// 댓글 삭제 버튼
+	$(".commentDelBtn ").on("click", function(e){
+		e.preventDefault(); // 위로 올라가는 현상 방지
+		let commentId = $(this).data("comment-id");
+		
+		$.ajax({
+			type:"POST"
+			, url:"/comment/delete"
+			, data:{"commentId":commentId}
+		
+			, success:function(data){
+				if(data.code == 1){
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error:function(request, status, error) {
+				alert("댓글 삭제에 실패했습니다.");
 			}
 		})
 	});

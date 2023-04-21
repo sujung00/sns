@@ -20,6 +20,13 @@ public class CommentRestController {
 	@Autowired
 	private CommentBO commentBO;
 	
+	/**
+	 * 댓글 생성
+	 * @param postId
+	 * @param content
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("postId") int postId,
@@ -44,6 +51,24 @@ public class CommentRestController {
 		} else {
 			result.put("code", 500);
 			result.put("errorMessage", "댓글 작성에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("commentId") int commentId){
+		Map<String, Object> result = new HashMap<>();
+		
+		int rowCount = commentBO.deleteComment(commentId);
+		
+		if(rowCount > 0) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "댓글 삭제 실패");
 		}
 		
 		return result;

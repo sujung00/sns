@@ -10,12 +10,11 @@ public class FollowBO {
 	
 	@Autowired
 	private FollowMapper followMapper;
-
-	public int addFollow(int userId, int followId) {
-		return followMapper.insertFollow(userId, followId);
-	}
 	
-	public int deleteFollow(int userId, int followId) {
-		return followMapper.deleteFollow(userId, followId);
-	}
+//	public int followToggle(int userId, int followId) {
+//		int rowCount = followMapper.
+//		
+//		if()
+//	}
+
 }
