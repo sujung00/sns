@@ -23,4 +23,6 @@ public interface LikeMapper {
 	public Like selectLikeByPostIdUserId(
 			@Param("postId") int postId,
 			@Param("userId") int userId);
+	
+	public int selectLikeCountByPostId(int postId);
 }

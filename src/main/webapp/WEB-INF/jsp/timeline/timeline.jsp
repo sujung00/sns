@@ -62,7 +62,7 @@
 							<img src="/static/img/heart-icon.png" width="18px" height="18px" alt="filled heart">
 						</a>
 					</c:if>
-					<span>좋아요 10개</span>
+					<span>좋아요 ${card.likeCount}개</span>
 				</div>
 				
 				<div class="ml-2 mt-1 mb-3 d-flex">

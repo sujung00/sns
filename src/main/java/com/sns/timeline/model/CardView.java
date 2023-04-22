@@ -19,8 +19,8 @@ public class CardView {
 	// 댓글 정보
 	private List<CommentView> commentList;
 
-
 	// 좋아요 n개
+	private int likeCount;
 	
 	// login된 user 기준 좋아요 여부 boolean
 	private boolean filledLike;
@@ -54,5 +54,12 @@ public class CardView {
 
 	public void setFilledLike(boolean filledLike) {
 		this.filledLike = filledLike;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 }
