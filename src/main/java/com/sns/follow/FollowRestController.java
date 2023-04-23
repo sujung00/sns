@@ -40,8 +40,7 @@ public class FollowRestController {
 		}
 		
 		// db insert
-		int rowCount = 1;
-		//followBO.followToggle(userId, followId);
+		int rowCount = followBO.followToggle(userId, followId);
 		
 		if(rowCount > 0) {
 			result.put("code", 1);

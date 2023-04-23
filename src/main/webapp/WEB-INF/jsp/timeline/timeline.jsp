@@ -36,7 +36,14 @@
 				<div class="m-2">
 					<a href="/user/profile_view?loginId=${card.user.loginId}"><span class="card-login-id">${card.user.loginId}</span></a>
 					<c:if test="${not empty userId}">
-						<button type="button" class="follow-btn">팔로우</button>
+						<c:if test="${userId != card.post.userId}">
+						<c:if test="${card.followed eq true}">
+							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">팔로우</button>
+						</c:if>
+						<c:if test="${card.followed eq false}">
+							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">언팔로우</button>
+						</c:if>
+						</c:if>
 					</c:if>
 				</div>
 				<a href="#" class="more-btn">
@@ -253,6 +260,30 @@ $(document).ready(function(){
 			, error:function(request, status, error) {
 				alert("댓글 삭제에 실패했습니다.");
 			}
+		})
+	});
+	
+	// follow 버튼 클릭
+	$(".follow-btn").on("click", function(e){
+		e.preventDefault(); // 위로 올라가는 현상 방지
+		let followId = $(this).data("follow-id");
+		
+		$.ajax({
+			url:"/follow/" + followId
+			
+			, success:function(data) {
+				if(data.code == 1){
+					location.reload();
+				} else if(data.code == 300) {
+					alert(data.errorMessage);
+					
+					location.href = "/user/sign_in_view"; // 로그인 화면으로 이동
+				}
+			}
+			, error:function(request, status, error) {
+				alert("팔로우에 실패했습니다.");
+			}
+		
 		})
 	});
 	

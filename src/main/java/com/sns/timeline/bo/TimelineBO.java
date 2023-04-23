@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sns.comment.bo.CommentBO;
 import com.sns.comment.model.CommentView;
+import com.sns.follow.bo.FollowBO;
+import com.sns.follow.model.Follow;
 import com.sns.like.bo.LikeBO;
 import com.sns.like.model.Like;
 import com.sns.post.bo.PostBO;
@@ -30,6 +32,9 @@ public class TimelineBO {
 	
 	@Autowired
 	private LikeBO likeBO;
+	
+	@Autowired
+	private FollowBO followBO;
 
 	// 비로그인도 카드 리스트가 보여져야 하기 때문에 userId는 null 가능
 	public List<CardView> generateCardList(Integer userId) {
@@ -70,7 +75,17 @@ public class TimelineBO {
 				}
 			}
 			
-			// follow
+			// 내가 post작성한 사람을 follow 했는지 여부
+			if(userId == null) {
+				card.setFollowed(false);
+			} else {
+				Follow follow = followBO.getFollowByUserIdFollowId(userId, post.getUserId());
+				if(follow == null) {
+					card.setFollowed(false);
+				} else {
+					card.setFollowed(true);
+				}
+			}
 			
 			//!!! cardList에 채우기
 			cardViewList.add(card);

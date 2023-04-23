@@ -24,6 +24,9 @@ public class CardView {
 	
 	// login된 user 기준 좋아요 여부 boolean
 	private boolean filledLike;
+	
+	// login된 user 기준 follow 여부 boolean
+	private boolean followed;
 
 	public Post getPost() {
 		return post;
@@ -61,5 +64,12 @@ public class CardView {
 
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
+	}
+	public boolean isFollowed() {
+		return followed;
+	}
+
+	public void setFollowed(boolean followed) {
+		this.followed = followed;
 	}
 }

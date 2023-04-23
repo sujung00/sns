@@ -29,4 +29,28 @@
 		
 	</delete>
 
+	<select id="selectFollowCountByUserIdFollowId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`follow`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`followId` = #{followId}
+	</select>
+	
+	<select id="selectFollowByUserIdFollowId" parameterType="map" resultType="com.sns.follow.model.Follow">
+		SELECT
+			`userId`
+			,`followId`
+			,`createdAt`
+		FROM
+			`follow`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`followId` = #{followId}	
+	</select>
+		
 </mapper>

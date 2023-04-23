@@ -19,10 +19,11 @@
 					<h2>${user.loginId}</h2>
 					<c:if test="${not empty userId}">
 					<c:if test="${userId != user.id}">
-						<!-- unfollow 상태 일 때 -->
-						<button id="followBtn" class="btn profile-follow-btn ml-3" data-user-id="${userId}" data-follow-id="${user.id}">팔로우</button>
+						<!-- un-follow 상태 일 때 -->
+						
+						<button class="btn profile-follow-btn ml-3" data-follow-id="${user.id}">팔로우</button>
 						<!-- follow 상태 일 때 -->
-						<button id="unFollowBtn" class="btn profile-follow-btn ml-3 d-none" data-user-id="${userId}" data-follow-id="${user.id}">언팔로우</button>
+						<button class="btn profile-follow-btn ml-3 d-none" data-follow-id="${user.id}">언팔로우</button>
 					</c:if>
 					</c:if>
 				</div>
@@ -75,50 +76,27 @@
 
 <script>
 	$(document).ready(function(){
-		// follow 버튼
-		$("#followBtn").on("click", function(){
-			$(this).addClass('d-none');
-			$("#unFollowBtn").removeClass('d-none');
-			
-			let userId = $(this).data("user-id");
+		// follow 버튼 클릭
+		$(".profile-follow-btn").on("click", function(e){
+			e.preventDefault(); // 위로 올라가는 현상 방지
 			let followId = $(this).data("follow-id");
 			
 			$.ajax({
-				type:"POST"
-				, url:"/follow/follow"
-				, data:{"userId":userId, "followId":followId}
-			
-				, success:function(data){
+				url:"/follow/" + followId
+				
+				, success:function(data) {
 					if(data.code == 1){
-						alert("팔로우 되었습니다.");
-					} else {
+						location.reload();
+					} else if(data.code == 300) {
 						alert(data.errorMessage);
+						
+						location.href = "/user/sign_in_view"; // 로그인 화면으로 이동
 					}
 				}
-			})
-			
-		});
-		
-		// unfollow버튼
-		$("#unFollowBtn").on("click", function(){
-			$(this).addClass('d-none');
-			$("#followBtn").removeClass('d-none');
-			
-			let userId = $(this).data("user-id");
-			let followId = $(this).data("follow-id");
-			
-			$.ajax({
-				type:"POST"
-				, url:"/follow/unfollow"
-				, data:{"userId":userId, "followId":followId}
-			
-				, success:function(data){
-					if(data.code == 1){
-						alert("언팔로우 되었습니다.");
-					} else {
-						alert(data.errorMessage);
-					}
+				, error:function(request, status, error) {
+					alert("팔로우에 실패했습니다.");
 				}
+			
 			})
 		});
 	});
