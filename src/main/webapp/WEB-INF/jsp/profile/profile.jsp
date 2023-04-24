@@ -5,8 +5,8 @@
 	<div class="d-flex">
 		<div>
 			<c:choose>
-				<c:when test="${not empty user.profileImagePath}">
-					<img alt="프로필 이미지 사진" src="${user.profileImagePath}" width="150" class="profile-image">
+				<c:when test="${not empty profile.user.profileImagePath}">
+					<img alt="프로필 이미지 사진" src="${profile.user.profileImagePath}" width="150" class="profile-image">
 				</c:when>
 				<c:otherwise>
 					<img alt="프로필 이미지 사진" src="/static/img/profile.jpg" width="150" class="profile-image">
@@ -16,29 +16,31 @@
 		<div class="ml-5 d-flex align-items-center w-100">
 			<div class="w-100">
 				<div class="d-flex align-items-center">
-					<h2>${user.loginId}</h2>
+					<h2>${profile.user.loginId}</h2>
 					<c:if test="${not empty userId}">
-					<c:if test="${userId != user.id}">
+					<c:if test="${userId != profile.user.id}">
 						<!-- un-follow 상태 일 때 -->
-						
-						<button class="btn profile-follow-btn ml-3" data-follow-id="${user.id}">팔로우</button>
+						<c:if test="${profile.followed eq false}">
+							<button class="btn profile-follow-btn ml-3" data-follow-id="${profile.user.id}">팔로우</button>
+						</c:if>
 						<!-- follow 상태 일 때 -->
-						<button class="btn profile-follow-btn ml-3 d-none" data-follow-id="${user.id}">언팔로우</button>
+						<c:if test="${profile.followed eq true}">
+							<button class="btn profile-follow-btn ml-3" data-follow-id="${profile.user.id}">언팔로우</button>
+						</c:if>
 					</c:if>
 					</c:if>
 				</div>
-				<c:if test="${userId == user.id}">
-				<form action="/user/profile_edit_view" method="post">
-					<input id="userId" name="userId" value="${userId}" class="d-none">
-					<button id="profileFixBtn" type="submit" class="btn btn-secondary mt-3 btn-profile">프로필 편집</button>
-				</form>
+				<c:if test="${userId == profile.user.id}">
+					<a href="/profile/profile_edit_view">
+						<button id="profileFixBtn" type="submit" class="btn btn-secondary mt-3 btn-profile">프로필 편집</button>
+					</a>
 				</c:if>
 			</div>
 		</div>
 	</div>
 
 	<div class="mt-3">
-		<h3 class="font-weight-bold">${user.name}</h3>
+		<h3 class="font-weight-bold">${profile.user.name}</h3>
 	</div>
 
 	<div
@@ -47,26 +49,26 @@
 			<div>
 				<b>게시물</b>
 			</div>
-			<div>3</div>
+			<div>${profile.postCount}</div>
 		</div>
 		<div>
 			<div>
 				<b>팔로워</b>
 			</div>
-			<div>1200</div>
+			<div>${profile.followerCount}</div>
 		</div>
 		<div>
 			<div>
-				<b>팔로우</b>
+				<b>팔로잉</b>
 			</div>
-			<div>1000</div>
+			<div>${profile.followingCount}</div>
 		</div>
 	</div>
 
 	<div class="d-flex justify-content-between w-100">
 		
 		<!-- post img -->
-		<c:forEach items="${postList}" var="post">
+		<c:forEach items="${profile.postList}" var="post">
 		<div class="profile-post-image d-flex align-items-center">
 			<img alt="post이미지" src="${post.imagePath}" class="w-100">
 		</div>

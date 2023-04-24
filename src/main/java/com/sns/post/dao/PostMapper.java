@@ -19,4 +19,6 @@ public interface PostMapper {
 			@Param("imagePath") String imagePath);
 	
 	public List<Post> selectPostListByUserId(int userId);
+	
+	public int selectPostCountByUserId(int userId);
 }

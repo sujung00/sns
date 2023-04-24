@@ -14,7 +14,7 @@
 		<c:choose>
 			<c:when test="${not empty userId}">
 				<span class="mr-3"><b>${userName}</b>님 안녕하세요!</span>
-				<a href="/user/profile_view?loginId=${userLoginId}" class="font-weight-bold mr-3">내 프로필</a>
+				<a href="/profile/profile_view/${userLoginId}" class="font-weight-bold mr-3">내 프로필</a>
 				<a href="/user/sign_out" class="font-weight-bold">로그아웃</a>
 			</c:when>
 			<c:otherwise>

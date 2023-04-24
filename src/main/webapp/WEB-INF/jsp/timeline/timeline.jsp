@@ -34,14 +34,14 @@
 		<div class="border mb-5 card">
 			<div class="d-flex align-items-center justify-content-between">
 				<div class="m-2">
-					<a href="/user/profile_view?loginId=${card.user.loginId}"><span class="card-login-id">${card.user.loginId}</span></a>
+					<a href="/profile/profile_view/${card.user.loginId}"><span class="card-login-id">${card.user.loginId}</span></a>
 					<c:if test="${not empty userId}">
 						<c:if test="${userId != card.post.userId}">
 						<c:if test="${card.followed eq true}">
-							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">팔로우</button>
+							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">언팔로우</button>
 						</c:if>
 						<c:if test="${card.followed eq false}">
-							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">언팔로우</button>
+							<button type="button" class="follow-btn" data-follow-id="${card.post.userId}">팔로우</button>
 						</c:if>
 						</c:if>
 					</c:if>

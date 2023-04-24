@@ -13,15 +13,22 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="ml-5 d-flex align-items-center w-100">
-			<div class="w-100 d-flex align-items-center">
-				<button id="profileImageBtn" type="button" class="btn btn-profile-fix">프로필 이미지 변경</button>
-
-				<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
-				<input type="file" id="file" class="d-none" accept=".gif, .jpg, .png, .jpeg">
-
-				<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
-				<div id="fileName" class="ml-2 d-flex align-items-center font-weight-bold"></div>
+		<div class="d-flex align-items-center">
+			<div class="ml-5">
+				<div class="w-100">
+					<div class="w-100 d-flex align-items-center">
+						<button id="profileImageBtn" type="button" class="btn btn-profile-fix">프로필 이미지 변경</button>
+		
+						<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
+						<input type="file" id="file" class="d-none" accept=".gif, .jpg, .png, .jpeg">
+		
+						<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+						<div id="fileName" class="ml-2 d-flex align-items-center font-weight-bold"></div>
+					</div>
+				</div>
+				<div class="mt-2">
+					<button type="button" id="basisImgBtn" class="basis-image-btn">기본 이미지로 변경</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -86,6 +93,13 @@ $(document).ready(function(){
 		$("#fileName").text(fileName);
 	});
 	
+	// 기본 이미지 변경 버튼
+	$("#basisImgBtn").on("click", function(){
+		// 파일 비우기
+		$("#file").val(""); // 파일 태그에 파일 제거
+		$("#fileName").text("기본 이미지"); // 파일 이름 바꾸기
+	});
+	
 	//아이디 중복확인 버튼
 	$("#loginIdCheckBtn").on('click', function() {
 		$("#idCheckLength").addClass('d-none');
@@ -136,6 +150,8 @@ $(document).ready(function(){
 		let email = $("#email").val().trim();
 		let userId = $("#loginId").data("user-id");
 		
+		let fileName = $("#fileName").text();
+		
 		if(!name) {
 			alert("이름을 입력해주세요");
 			return false;
@@ -156,10 +172,11 @@ $(document).ready(function(){
 		formData.append("loginId", loginId);
 		formData.append("email", email);
 		formData.append("file", $('#file')[0].files[0]);
+		formData.append("fileName", fileName);
 		
 		$.ajax({
 			type:"PUT"
-			, url:"/user/profile_edit"
+			, url:"/profile/profile_edit"
 			, data:formData
 			, enctype:"multipart/form-data"
 			, processData:false
@@ -168,7 +185,7 @@ $(document).ready(function(){
 			, success:function(data){
 				if(data.code == 1){
 					alert("프로필이 수정되었습니다.");
-					location.href = "/user/profile_view?loginId=" + loginId;
+					location.href = "/profile/profile_view/" + loginId;
 				} else {
 					alert(data.errorMessage);
 				}

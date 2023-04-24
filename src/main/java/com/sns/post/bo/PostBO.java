@@ -18,7 +18,6 @@ public class PostBO {
 	
 	@Autowired
 	private PostMapper postMapper;
-	
 
 	public int addPost(int userId, String loginId, String content, MultipartFile file) {
 		
@@ -37,5 +36,9 @@ public class PostBO {
 	
 	public List<Post> getPostListByUserId(int userId) {
 		return postMapper.selectPostListByUserId(userId);
+	}
+	
+	public int getPostCountByUserId(int userId) {
+		return postMapper.selectPostCountByUserId(userId);
 	}
 }

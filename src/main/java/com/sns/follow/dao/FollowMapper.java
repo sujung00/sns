@@ -23,4 +23,8 @@ public interface FollowMapper {
 	public Follow selectFollowByUserIdFollowId(
 			@Param("userId") int userId,
 			@Param("followId") int followId);
+	
+	public int selectFollowerCountByFollowId(int followId);
+	
+	public int selectFollowingCountByUserId(int userId);
 }

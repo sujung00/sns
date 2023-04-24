@@ -52,5 +52,22 @@
 			AND
 			`followId` = #{followId}	
 	</select>
+	
+	<select id="selectFollowerCountByFollowId" parameterType="int" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`follow`
+		WHERE
+			`followId` = #{followId}	
+	</select>
 		
+	<select id="selectFollowingCountByUserId" parameterType="int" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`follow`
+		WHERE
+			`userId` = #{userId}	
+	</select>
 </mapper>

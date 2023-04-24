@@ -27,5 +27,12 @@ public class FollowBO {
 	public Follow getFollowByUserIdFollowId(int userId, int followId) {
 		return followMapper.selectFollowByUserIdFollowId(userId, followId);
 	}
+	
+	public int getFollowerCountByFollowId(int followId) {
+		return followMapper.selectFollowerCountByFollowId(followId);
+	}
 
+	public int getFollowingCountByUserId(int userId) {
+		return followMapper.selectFollowingCountByUserId(userId);
+	}
 }

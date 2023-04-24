@@ -247,3 +247,12 @@ textarea {
 	height: 120px;
 	border-radius: 70%;
 }
+
+.basis-image-btn {
+	cursor: pointer;
+	border: none;
+	background-color: white;
+	color: var(--primary-color);
+	font-size: 0.8rem;
+	font-weight: bold;
+}
