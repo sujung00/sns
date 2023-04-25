@@ -70,7 +70,9 @@
 		<!-- post img -->
 		<c:forEach items="${profile.postList}" var="post">
 		<div class="profile-post-image d-flex align-items-center">
-			<img alt="post이미지" src="${post.imagePath}" class="w-100">
+			<a href="/post/card_detail/${post.id}">
+				<img alt="post이미지" src="${post.imagePath}" class="w-100">
+			</a>
 		</div>
 		</c:forEach>
 	</div>

@@ -43,9 +43,8 @@
 			<h4 class="font-weight-bold">아이디</h4>
 			<div class="d-flex align-items-center">
 				<input type="text" id="loginId"
-					class="form-control profile-fix-input" value="${user.loginId}"
-					data-user-loginid="${user.loginId}" data-user-id="${user.id}">
-				<button id="loginIdCheckBtn" class="btn btn-profile-fix ml-2">중복확인</button>
+					class="form-control profile-fix-input" value="${user.loginId}" data-user-id="${user.id}">
+				<button id="loginIdCheckBtn" class="btn btn-profile-fix ml-2" data-login-id="${user.loginId}">중복확인</button>
 			</div>
 			<%-- 아이디 체크 결과 --%>
 			<%-- d-none 클래스: display none (보이지 않게) --%>
@@ -107,7 +106,7 @@ $(document).ready(function(){
 		$("#idCheckOk").addClass('d-none');
 
 		let loginId = $("#loginId").val().trim();
-		let currentLoginId = $("#loginId").data("user-loginid");
+		let currentLoginId = $(this).data("login-id");
 					
 		if (loginId.length < 4) {
 			$("#idCheckLength").removeClass('d-none');
@@ -148,8 +147,7 @@ $(document).ready(function(){
 		let name = $("#name").val().trim();
 		let loginId = $("#loginId").val().trim();
 		let email = $("#email").val().trim();
-		let userId = $("#loginId").data("user-id");
-		
+		let file = $("#file").val();
 		let fileName = $("#fileName").text();
 		
 		if(!name) {
@@ -164,10 +162,20 @@ $(document).ready(function(){
 			alert("아이디 중복확인을 해주세요");
 			return false;
 		}
+		// 파일이 업로드 된 경우 확장자 체크
+		if(file){
+			let ext = file.split(".").pop().toLowerCase();
+			
+			if($.inArray(ext, ["jpg", "jpeg", "png", "gif"]) == -1){
+				alert("이미지 파일만 업로드 할 수 있습니다.");
+				
+				$("#file").val(""); // 파일을 비운다.
+				return;
+			}
+		}
 		
 		//AJAX
 		let formData = new FormData();
-		formData.append("userId", userId);
 		formData.append("name", name);
 		formData.append("loginId", loginId);
 		formData.append("email", email);

@@ -33,16 +33,7 @@ public class ProfileBO {
 		profileView.setUser(user);
 
 		// 내가 profile user를 follow 했는지 여부
-		if (userId == null) {
-			profileView.setFollowed(false);
-		} else {
-			Follow follow = followBO.getFollowByUserIdFollowId(userId, user.getId());
-			if (follow == null) {
-				profileView.setFollowed(false);
-			} else {
-				profileView.setFollowed(true);
-			}
-		}
+		profileView.setFollowed(followBO.existFollow(userId, user.getId()));
 
 		// post 개수
 		int postCount = postBO.getPostCountByUserId(user.getId());

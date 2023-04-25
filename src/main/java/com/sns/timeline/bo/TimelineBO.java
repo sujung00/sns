@@ -64,33 +64,43 @@ public class TimelineBO {
 			card.setLikeCount(likeCount);
 			
 			// 내가(로그인 된 사람) 좋아요를 눌렀는지 여부
-			if (userId == null) {
-				card.setFilledLike(false);
-			} else {
-				Like like = likeBO.getLikeByPostIdUserId(post.getId(), userId);
-				if(like == null) {
-					card.setFilledLike(false);
-				} else {
-					card.setFilledLike(true);
-				}
-			}
+			card.setFilledLike(likeBO.existLike(post.getId(), userId));
 			
 			// 내가 post작성한 사람을 follow 했는지 여부
-			if(userId == null) {
-				card.setFollowed(false);
-			} else {
-				Follow follow = followBO.getFollowByUserIdFollowId(userId, post.getUserId());
-				if(follow == null) {
-					card.setFollowed(false);
-				} else {
-					card.setFollowed(true);
-				}
-			}
+			card.setFollowed(followBO.existFollow(userId, post.getUserId()));
 			
 			//!!! cardList에 채우기
 			cardViewList.add(card);
 		}
 		
 		return cardViewList;
+	}
+	
+	public CardView generateCard(int postId, Integer userId) {
+		CardView cardView = new CardView();
+		
+		// post
+		Post post = postBO.getPostByPostId(postId);
+		cardView.setPost(post);
+		
+		// user
+		User user = userBO.getUserByUserId(post.getUserId());
+		cardView.setUser(user);
+		
+		// comment
+		List<CommentView> commentList = commentBO.generateCommentViewListByPostId(post.getId());
+		cardView.setCommentList(commentList);
+		
+		// like 개수
+		int likeCount = likeBO.getLikeCountByPostId(post.getId());
+		cardView.setLikeCount(likeCount);
+		
+		// 내가(로그인 된 사람) 좋아요를 눌렀는지 여부
+		cardView.setFilledLike(likeBO.existLike(post.getId(), userId));
+
+		// 내가 post작성한 사람을 follow 했는지 여부
+		cardView.setFollowed(followBO.existFollow(userId, post.getUserId()));
+
+		return cardView;
 	}
 }

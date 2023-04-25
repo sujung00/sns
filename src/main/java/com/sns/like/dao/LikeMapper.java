@@ -8,10 +8,12 @@ import com.sns.like.model.Like;
 @Repository
 public interface LikeMapper {
 
-	public int selectLikeCount(
-			@Param("postId") int postId,
-			@Param("userId") int userId);
+//	public int selectLikeCount(
+//			@Param("postId") int postId,
+//			@Param("userId") int userId);
 	
+	//public int selectLikeCountByPostId(int postId);
+
 	public int deleteLikeByPostIdUserId(
 			@Param("postId") int postId,
 			@Param("userId") int userId);
@@ -20,9 +22,10 @@ public interface LikeMapper {
 			@Param("postId") int postId,
 			@Param("userId") int userId);
 	
-	public Like selectLikeByPostIdUserId(
-			@Param("postId") int postId,
-			@Param("userId") int userId);
 	
-	public int selectLikeCountByPostId(int postId);
+	public int selectLikeCountByPostIdOrUserId(
+			@Param("postId") int postId,
+			@Param("userId") Integer userId);
+	
+	public void deleteLikeByPostId(int postId);
 }

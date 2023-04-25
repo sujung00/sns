@@ -5,7 +5,7 @@
 	<%-- logo --%>
 	<div>
 		<a href="/timeline/timeline_view">
-			<h3 class="font-weight-bold">Marondalgram</h3>
+			<h3 class="font-weight-bold">FLORIFEROUSGRAM</h3>
 		</a>
 	</div>
 

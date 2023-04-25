@@ -4,7 +4,7 @@
  
 <mapper namespace="com.sns.like.dao.LikeMapper">
 
-	<select id="selectLikeCount" parameterType="map" resultType="int">
+<!-- 	<select id="selectLikeCount" parameterType="map" resultType="int">
 		SELECT
 			COUNT(1)
 		FROM
@@ -13,6 +13,29 @@
 			`postId` = #{postId}
 			AND
 			`userId` = #{userId}
+	</select> -->
+	
+<!-- 	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+	</select> -->
+	
+	<!-- likeCount 쿼리 하나로 합치기 -->
+	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			<if test="userId != null">
+			AND
+			`userId` = #{userId}
+			</if>
 	</select>
 	
 	<delete id="deleteLikeByPostIdUserId" parameterType="map">
@@ -39,26 +62,11 @@
 		)
 	</insert>
 	
-	<select id="selectLikeByPostIdUserId" parameterType="map" resultType="com.sns.like.model.Like">
-		SELECT
-			`postId`
-			,`userId`
-			,`createdAt`
-		FROM
-			`like`
+	<delete id="deleteLikeByPostId" parameterType="int">
+		DELETE
+		FROM `like`
 		WHERE
 			`postId` = #{postId}
-			AND
-			`userId` = #{userId}
-	</select>
+	</delete>
 	
-	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
-		SELECT
-			COUNT(1)
-		FROM
-			`like`
-		WHERE
-			`postId` = #{postId}
-	</select>
-
 </mapper>

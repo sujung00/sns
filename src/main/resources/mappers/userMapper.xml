@@ -81,18 +81,9 @@
 			`loginId` = #{loginId}
 			,`name` = #{name}
 			,`email` = #{email}
+			<if test="profileImagePath != null">
 			,`profileImagePath` = #{profileImagePath}
-			,`updatedAt` = NOW()
-		WHERE
-			`id` = #{userId}
-	</update>
-	
-	<update id="updateUserByIdNotImage" parameterType="map">
-		UPDATE `user`
-		SET
-			`loginId` = #{loginId}
-			,`name` = #{name}
-			,`email` = #{email}
+			</if>
 			,`updatedAt` = NOW()
 		WHERE
 			`id` = #{userId}

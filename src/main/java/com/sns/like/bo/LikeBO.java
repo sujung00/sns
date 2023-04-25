@@ -14,7 +14,7 @@ public class LikeBO {
 
 	public int likeToggle(int postId, int userId) {
 		//like 여부 체크
-		int rowCount = likeMapper.selectLikeCount(postId, userId);
+		int rowCount = likeMapper.selectLikeCountByPostIdOrUserId(postId, userId);
 		
 		if(rowCount > 0) {
 			// 좋아요 해제
@@ -26,11 +26,21 @@ public class LikeBO {
 		}
 	}
 	
-	public Like getLikeByPostIdUserId(int postId, int userId) {
-		return likeMapper.selectLikeByPostIdUserId(postId, userId);
+	public int getLikeCountByPostId(int postId) {
+		return likeMapper.selectLikeCountByPostIdOrUserId(postId, null);
 	}
 	
-	public int getLikeCountByPostId(int postId) {
-		return likeMapper.selectLikeCountByPostId(postId);
+	public boolean existLike(int postId, Integer userId) {
+		// 비로그인
+		if(userId == null) {
+			return false;
+		}
+		
+		// 로그인
+		return likeMapper.selectLikeCountByPostIdOrUserId(postId, userId) > 0;
+	}
+	
+	public void deleteLikeByPostId(int postId) {
+		likeMapper.deleteLikeByPostId(postId);
 	}
 }
