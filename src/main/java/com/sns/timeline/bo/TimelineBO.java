@@ -15,6 +15,7 @@ import com.sns.like.model.Like;
 import com.sns.post.bo.PostBO;
 import com.sns.post.model.Post;
 import com.sns.timeline.model.CardView;
+import com.sns.timeline.model.SearchView;
 import com.sns.user.bo.UserBO;
 import com.sns.user.model.User;
 
@@ -102,5 +103,23 @@ public class TimelineBO {
 		cardView.setFollowed(followBO.existFollow(userId, post.getUserId()));
 
 		return cardView;
+	}
+	
+	public List<SearchView> generateSearchViewList(Integer userId ,String search){
+		List<SearchView> searchViewList = new ArrayList<>();
+		
+		List<User> userList = userBO.getUserListByLoginId(search);
+		
+		for(User user : userList) {
+			SearchView searchView = new SearchView();
+			
+			searchView.setUser(user);
+			
+			searchView.setFollowed(followBO.existFollow(userId, user.getId()));
+			
+			searchViewList.add(searchView);
+		}
+		
+		return searchViewList;
 	}
 }

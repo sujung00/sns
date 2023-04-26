@@ -7,7 +7,24 @@ a, a:hover {
 
 header {
 	height: 100px;
-	background-color: var(--primary-color);
+	background-color: white;
+}
+
+header a {
+	color: var(--primary-color);
+}
+
+header a:hover {
+	color: var(--secondary-color);
+}
+
+.header-btn {
+	font-size: 30px;
+	font-weight: bold;
+	color: var(--primary-color);
+}
+.header-btn:hover {
+	color: var(--secondary-color);
 }
 
 .contents {
@@ -164,6 +181,25 @@ textarea {
 	font-weight: bold;
 }
 
+.search-btn {
+	font-weight: bold; border : 0.8px solid var( --primary-color);
+	color: var(--primary-color);
+	border: 0.8px solid var(--primary-color);
+}
+
+.search-btn:hover {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+#search {
+	padding: 0.7rem 1rem;
+	font-size: 1rem;
+	background-color: var(--white);
+	border: 0.01rem solid var(--secondary-color);
+	outline: none;
+}
+
 /*
 프로필
 */
@@ -187,8 +223,13 @@ textarea {
 
 .profile-post-image {
 	padding: .1rem;
-	max-height: 365;
 	width: 33%;
+}
+
+.profile-post-image img {
+	width: 100%;
+	max-height: 363px;
+	object-fit: cover;
 }
 
 .profile-image {
@@ -196,13 +237,19 @@ textarea {
 	border-radius: 70%;
 }
 
-.profile-follow-btn{
+.profile-follow-btn {
 	height: 100%;
 	border: none;
 	background-color: white;
 	color: var(--primary-color);
 	font-size: 1rem;
 	font-weight: bold;
+}
+#followerBtn:hover {
+	color: #2E8B57;
+}
+#followingBtn:hover {
+	color: #2E8B57;
 }
 
 /*
@@ -255,4 +302,27 @@ textarea {
 	color: var(--primary-color);
 	font-size: 0.8rem;
 	font-weight: bold;
+}
+/*
+검색 결과
+*/
+.user-card {
+	width: 70%;
+	border: 1px solid var(--primary-color);
+	padding: 0.8rem;
+	border-radius: 10px;
+}
+
+.user-card:hover {
+	background-color: var(--primary-color);
+}
+.user-card:hover button {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+.card-user-image {
+	width:60px;
+	height: 60px;
+	border-radius: 70%;
 }

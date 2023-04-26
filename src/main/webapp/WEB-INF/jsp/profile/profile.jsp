@@ -51,15 +51,15 @@
 			</div>
 			<div>${profile.postCount}</div>
 		</div>
-		<div>
+		<div id="followerBtn">
 			<div>
 				<b>팔로워</b>
 			</div>
 			<div>${profile.followerCount}</div>
 		</div>
-		<div>
+		<div id="followingBtn">
 			<div>
-				<b>팔로잉</b>
+				<b>팔로우</b>
 			</div>
 			<div>${profile.followingCount}</div>
 		</div>
@@ -69,13 +69,29 @@
 		
 		<!-- post img -->
 		<c:forEach items="${profile.postList}" var="post">
-		<div class="profile-post-image d-flex align-items-center">
-			<a href="/post/card_detail/${post.id}">
-				<img alt="post이미지" src="${post.imagePath}" class="w-100">
+		<div class="profile-post-image d-flex align-items-center justify-content-center">
+			<a href="/post/card_detail/${post.id}" class="w-100">
+				<img alt="post이미지" src="${post.imagePath}">
 			</a>
 		</div>
 		</c:forEach>
 	</div>
+</div>
+
+<!-- 모달 -->
+<div class="modal" id="followerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">팔로워</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- 팔로워 리스트 -->
+        팔로워 리스트
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -102,6 +118,25 @@
 				}
 			
 			})
+		});
+		
+		$("#followerBtn").on("click", function(e){
+			e.preventDefault(); // 위로 올라가는 현상 방지
+
+			let userId = $(this).data("user-id"); // getting
+
+			// (재횔용 되는)모달 태그에 data-post-id를 심어줌
+			$("#followerModal").data("user-id", user);
+			$("#followerModal").click();
+		});
+		
+		$("#followerModal").on("click", function(e) {
+			e.preventDefault(); // 위로 올라가는 현상 방지
+
+			let userId = $(this).data("user-id");
+
+			// 팔로워 목록 가져오기
+			
 		});
 	});
 </script>

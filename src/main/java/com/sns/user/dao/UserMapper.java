@@ -1,5 +1,7 @@
 package com.sns.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,9 +30,5 @@ public interface UserMapper {
 			@Param("email") String email,
 			@Param("profileImagePath") String profileImagePath);
 	
-//	public int updateUserByIdNotImage(
-//			@Param("userId") int userId,
-//			@Param("name") String name,
-//			@Param("loginId") String loginId,
-//			@Param("email") String email);
+	public List<User> selectUserListByLoginId(String loginId);
 }

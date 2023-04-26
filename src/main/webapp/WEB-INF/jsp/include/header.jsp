@@ -4,9 +4,13 @@
 <div class="h-100 d-flex justify-content-between align-items-center p-3">
 	<%-- logo --%>
 	<div>
-		<a href="/timeline/timeline_view">
-			<h3 class="font-weight-bold">FLORIFEROUSGRAM</h3>
-		</a>
+		<button type="button" class="header-btn btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">SOPHIAGRAM</button>
+		<div class="dropdown-menu">
+	    	<a class="dropdown-item" href="/timeline/timeline_view">전체보기</a>
+	    	<c:if test="${not empty userId}">
+	    		<a class="dropdown-item" href="/timeline/timeline_following_view">팔로잉</a>
+    		</c:if>
+    	</div>
 	</div>
 
 	<%-- 로그인 정보 --%>
@@ -18,7 +22,7 @@
 				<a href="/user/sign_out" class="font-weight-bold">로그아웃</a>
 			</c:when>
 			<c:otherwise>
-				<a href="/user/sign_in_view" class="font-weight-bold">로그인</a>
+				<a href="/user/sign_in_view" class="font-weight-bold">로그인 / 회원가입</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

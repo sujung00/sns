@@ -89,4 +89,19 @@
 			`id` = #{userId}
 	</update>
 
+	<select id="selectUserListByLoginId" parameterType="String" resultType="com.sns.user.model.User">
+		SELECT
+				`id`
+				,`loginId`
+				,`password`
+				,`name`
+				,`email`
+				,`profileImagePath`
+				,`createdAt`
+				,`updatedAt`
+			FROM
+				`user`
+			WHERE
+				`loginId` LIKE CONCAT(#{loginId}, '%')
+	</select>
 </mapper>
