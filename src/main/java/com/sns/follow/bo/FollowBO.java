@@ -1,5 +1,7 @@
 package com.sns.follow.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +29,17 @@ public class FollowBO {
 	public int getFollowerCountByFollowId(int followId) {
 		return followMapper.selectFollowerCountByFollowId(followId);
 	}
+	
+	public List<Follow> getFollowerListByFollowId(int followId){
+		return followMapper.selectFollowerListByFollowId(followId);
+	}
 
 	public int getFollowingCountByUserId(int userId) {
 		return followMapper.selectFollowingCountByUserId(userId);
+	}
+	
+	public List<Follow> getFollowingListByUserId(int userId){
+		return followMapper.selectFollowingListByUserId(userId);
 	}
 	
 	public boolean existFollow(Integer userId, int followId) {

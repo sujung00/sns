@@ -251,6 +251,12 @@ textarea {
 #followingBtn:hover {
 	color: #2E8B57;
 }
+.user-follow-card {
+	width: 100%;
+	border: 1px solid var(--primary-color);
+	padding: 0.6rem;
+	border-radius: 10px;
+}
 
 /*
 프로필 변경

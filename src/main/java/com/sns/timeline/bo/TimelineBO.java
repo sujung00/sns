@@ -122,4 +122,40 @@ public class TimelineBO {
 		
 		return searchViewList;
 	}
+	
+	public List<SearchView> generateSearchViewListByFollowId(Integer userId, List<Follow> followList){
+		List<SearchView> searchViewList = new ArrayList<>();
+		
+		for(int i = 0; i < followList.size(); i++) {
+			SearchView searchView = new SearchView();
+			
+			User user = userBO.getUserByUserId(followList.get(i).getUserId());
+			
+			searchView.setUser(user);
+			
+			searchView.setFollowed(followBO.existFollow(userId, user.getId()));
+			
+			searchViewList.add(searchView);
+		}
+		
+		return searchViewList;
+	}
+	
+	public List<SearchView> generateSearchViewListByUserId(Integer userId, List<Follow> followList){
+		List<SearchView> searchViewList = new ArrayList<>();
+		
+		for(int i = 0; i < followList.size(); i++) {
+			SearchView searchView = new SearchView();
+			
+			User user = userBO.getUserByUserId(followList.get(i).getFollowId());
+			
+			searchView.setUser(user);
+			
+			searchView.setFollowed(followBO.existFollow(userId, user.getId()));
+			
+			searchViewList.add(searchView);
+		}
+		
+		return searchViewList;
+	}
 }

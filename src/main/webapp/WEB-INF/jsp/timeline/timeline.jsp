@@ -60,8 +60,7 @@
 						</c:if>
 					</div>
 					<c:if test="${userId eq card.user.id}">
-						<a href="#" class="more-btn" data-toggle="modal"
-							data-target="#modal" data-post-id="${card.post.id}"> <img
+						<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}"> <img
 							alt="더보기" src="/static/img/more-icon.png" width="30" class="mr-2">
 						</a>
 					</c:if>
@@ -338,53 +337,53 @@
 
 			})
 		});
-
-	});
-
-	// 더보기 버튼(... 버튼) 클릭 => 글 삭제 위해
-	$(".more-btn").on("click", function(e) {
-		e.preventDefault(); // 위로 올라가는 현상 방지
-
-		let postId = $(this).data("post-id"); // getting
-
-		// (재횔용 되는)모달 태그에 data-post-id를 심어줌
-		$("#modal").data("post-id", postId);
-	});
-
-	// 모달 안에 있는 삭제하기 버튼 클릭 => 진짜 삭제
-	$("#modal #deletePostBtn").on("click", function(e) {
-		e.preventDefault(); // 위로 올라가는 현상 방지
-
-		let postId = $("#modal").data("post-id");
-
-		$.ajax({
-			type : "DELETE",
-			url : "/post/delete",
-			data : {
-				"postId" : postId
-			}
-
-			,
-			success : function(data) {
-				if (data.code == 1) {
-					alert("게시글이 삭제되었습니다");
-					location.reload();
-				} else {
-					alert(data.errorMessage);
-				}
-			},
-			error : function(request, status, error) {
-				alert("게시글 삭제에 실패했습니다.");
-			}
-		})
-	});
-	
-	$("#searchBtn").on("click", function(){
-		let search = $("#search").val().trim();
 		
-		if(!search) {
-			alert("검색어를 입력하세요");
-			return;
-		}
+		// 더보기 버튼(... 버튼) 클릭 => 글 삭제 위해
+		$(".more-btn").on("click", function(e) {
+			e.preventDefault(); // 위로 올라가는 현상 방지
+
+			let postId = $(this).data("post-id"); // getting
+
+			// (재횔용 되는)모달 태그에 data-post-id를 심어줌
+			$("#modal").data("post-id", postId);
+		});
+
+		// 모달 안에 있는 삭제하기 버튼 클릭 => 진짜 삭제
+		$("#modal #deletePostBtn").on("click", function(e) {
+			e.preventDefault(); // 위로 올라가는 현상 방지
+
+			let postId = $("#modal").data("post-id");
+
+			$.ajax({
+				type : "DELETE",
+				url : "/post/delete",
+				data : {
+					"postId" : postId
+				}
+
+				,
+				success : function(data) {
+					if (data.code == 1) {
+						alert("게시글이 삭제되었습니다");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				},
+				error : function(request, status, error) {
+					alert("게시글 삭제에 실패했습니다.");
+				}
+			})
+		});
+		
+		$("#searchBtn").on("click", function(){
+			let search = $("#search").val().trim();
+			
+			if(!search) {
+				alert("검색어를 입력하세요");
+				return;
+			}
+		});
+		
 	});
 </script>

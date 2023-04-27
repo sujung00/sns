@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <!-- 내가 만든 스타일시트 -->
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<meta name ="google-signin-client_id" content="500639666960-m54si8gbe16fimpq8rvir5tue5oatp3a.apps.googleusercontent.com">
+<!-- 구글 api 사용을 위한 스크립트 -->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
 <body>
 	<div id="wrap" class="bg-dark">

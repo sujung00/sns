@@ -3,6 +3,7 @@ package com.sns.profile.model;
 import java.util.List;
 
 import com.sns.post.model.Post;
+import com.sns.timeline.model.SearchView;
 import com.sns.user.model.User;
 
 public class ProfileView {
@@ -15,8 +16,12 @@ public class ProfileView {
 	
 	private int followerCount;
 	
+	private List<SearchView> followerList;
+	
 	private int followingCount;
 	
+	private List<SearchView> followingList;
+
 	private List<Post> postList;
 
 	public User getUser() {
@@ -64,5 +69,20 @@ public class ProfileView {
 
 	public void setPostList(List<Post> postList) {
 		this.postList = postList;
+	}
+	public List<SearchView> getFollowerList() {
+		return followerList;
+	}
+
+	public void setFollowerList(List<SearchView> followerList) {
+		this.followerList = followerList;
+	}
+
+	public List<SearchView> getFollowingList() {
+		return followingList;
+	}
+
+	public void setFollowingList(List<SearchView> followingList) {
+		this.followingList = followingList;
 	}
 }

@@ -1,5 +1,7 @@
 package com.sns.follow.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +25,8 @@ public interface FollowMapper {
 	public int selectFollowerCountByFollowId(int followId);
 	
 	public int selectFollowingCountByUserId(int userId);
+	
+	public List<Follow> selectFollowerListByFollowId(int followId);
+	
+	public List<Follow> selectFollowingListByUserId(int userId);
 }
