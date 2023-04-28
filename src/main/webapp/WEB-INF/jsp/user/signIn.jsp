@@ -24,20 +24,11 @@
 			<a href="/user/sign_up_view"
 				class="btn btn-secondary btn-user btn-block">회원가입</a>
 		</form>
-		<button type="button" id="googleLoginBtn" class="btn btn-user btn-block mt-2">google로 로그인</button>
 	</div>
 </div>
 
 
 <script>
-function onSignIn(googleUser) {
-	  var profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
 	$(document).ready(function() {
 		$("#loginForm").on("submit", function(e) {
 			e.preventDefault();
